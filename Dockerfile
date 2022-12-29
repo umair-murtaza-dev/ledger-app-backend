@@ -6,6 +6,7 @@ COPY Gemfile /ledger/Gemfile
 COPY Gemfile.lock /ledger/Gemfile.lock
 RUN gem uninstall bundler
 RUN bundle lock --add-platform x86-mingw32 x86-mswin32 x64-mingw32 java
+RUN bundle lock --add-platform x86_64-linux
 RUN gem install bundler -v 2.1.4
 RUN bundle update --bundler
 

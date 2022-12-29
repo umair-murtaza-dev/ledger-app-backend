@@ -40,9 +40,6 @@ gem "json", ">= 2.3.0"
 gem 'puma', '~> 5.2'
 gem 'rswag-api'
 gem 'rswag-ui'
-#zipkin
-# gem 'zipkin'
-# gem 'zipkin-tracer'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
