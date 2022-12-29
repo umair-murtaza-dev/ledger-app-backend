@@ -48,6 +48,6 @@ class Api::V1::VendorsController < Api::V1::ApplicationController
 
     # Only allow a list of trusted parameters through.
     def vendor_params
-      params.require(:vendor).permit(:company_id, :title, :code, :description, :address)
+      params.require(:vendor).permit(:company_id, :title, :code, :address)
     end
 end
