@@ -4,8 +4,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.7.5'
 
 gem 'rails', '~> 6.0.4.1'
-gem 'mysql2'
-gem 'activerecord-mysql2-adapter'
+# gem 'mysql2'
+
+gem 'pg'
 gem 'devise'
 gem 'devise-jwt'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -14,23 +15,13 @@ gem 'aws-sdk-s3', '~> 1'
 gem 'paperclip'
 gem 'kaminari'
 gem 'yard'
-gem "sidekiq", '~> 6.2.1'
-gem "sidekiq-cron"
-gem 'redis-rails'
-gem 'redis'
-gem 'hiredis'
-gem 'redis-namespace'
 gem "faraday" #, '~> 0.8'
 gem 'httpclient'
 gem "jwt"
-gem 'zlib'
-gem 'aasm'
-gem "flag_shih_tzu"
-gem 'fcm'
+
 # zip files
 gem 'rubyzip'
 gem 'acts_as_paranoid'
-gem 'houston'
 gem 'paper_trail'
 gem 'httparty'
 gem 'curb', '~> 0.9.10'

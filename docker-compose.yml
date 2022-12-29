@@ -12,29 +12,25 @@ services:
       - ledger_network
     links:
       - db
-      - redis
     depends_on:
       - db
-      - redis
   db:
-    image: "mysql:5.7"
+    container_name: postgres_container
+    image: postgres
     environment:
-      MYSQL_ROOT_PASSWORD: 'root'
-    ports:
-       - "3306"
-    networks:
-      - ledger_network
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      PGDATA: /data/postgres
     volumes:
-      - mysql-data:/var/lib/mysql
-  redis:
-    image: redis
+       - postgres-data
+    ports:
+      - "5432:5432"
     networks:
       - ledger_network
-    ports:
-      - "6379"
+    restart: unless-stopped
 
 networks:
   ledger_network:
 
 volumes:
-  mysql-data:
+  postgres-data:
