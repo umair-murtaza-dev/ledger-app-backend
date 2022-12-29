@@ -25,7 +25,7 @@ module Ledger
     config.load_defaults 6.0
     config.autoload_paths += %w[components lib].map { |dir| "#{config.root}/#{dir}" }
     config.eager_load_paths += %w[components].map { |dir| "#{config.root}/#{dir}" }
-    config.cache_store = :redis_cache_store, { url: ENV['ledger_redis_cache_uri']}
+    # config.cache_store = :redis_cache_store, { url: ENV['ledger_redis_cache_uri']}
     console do
       Rails.logger.level = :debug
     end
