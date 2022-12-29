@@ -18,7 +18,7 @@ class Api::V1::HeadOfAccountsController < Api::V1::ApplicationController
     @head_of_account = HeadOfAccount.new(head_of_account_params)
 
     if @head_of_account.save
-      render :show, status: :created, location: @head_of_account
+      render json: @head_of_account.to_json, status: :ok
     else
       render json: @head_of_account.errors, status: :unprocessable_entity
     end
@@ -28,7 +28,7 @@ class Api::V1::HeadOfAccountsController < Api::V1::ApplicationController
   # PATCH/PUT /head_of_accounts/1.json
   def update
     if @head_of_account.update(head_of_account_params)
-      render :show, status: :ok, location: @head_of_account
+      render json: @head_of_account.to_json, status: :ok
     else
       render json: @head_of_account.errors, status: :unprocessable_entity
     end

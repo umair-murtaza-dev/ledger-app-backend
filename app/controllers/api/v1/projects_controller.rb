@@ -18,7 +18,7 @@ class Api::V1::ProjectsController < Api::V1::ApplicationController
     @project = Project.new(project_params)
 
     if @project.save
-      render :show, status: :created, location: @project
+      render json: @project.to_json, status: :ok
     else
       render json: @project.errors, status: :unprocessable_entity
     end
@@ -28,7 +28,7 @@ class Api::V1::ProjectsController < Api::V1::ApplicationController
   # PATCH/PUT /projects/1.json
   def update
     if @project.update(project_params)
-      render :show, status: :ok, location: @project
+      render json: @project.to_json, status: :ok
     else
       render json: @project.errors, status: :unprocessable_entity
     end

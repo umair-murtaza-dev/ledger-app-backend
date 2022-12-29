@@ -18,7 +18,7 @@ class Api::V1::ExpensesController < Api::V1::ApplicationController
     @expense = Expense.new(expense_params)
 
     if @expense.save
-      render :show, status: :created, location: @expense
+      render json: @expense.to_json, status: :ok
     else
       render json: @expense.errors, status: :unprocessable_entity
     end
@@ -28,7 +28,7 @@ class Api::V1::ExpensesController < Api::V1::ApplicationController
   # PATCH/PUT /expenses/1.json
   def update
     if @expense.update(expense_params)
-      render :show, status: :ok, location: @expense
+      render json: @expense.to_json, status: :ok
     else
       render json: @expense.errors, status: :unprocessable_entity
     end

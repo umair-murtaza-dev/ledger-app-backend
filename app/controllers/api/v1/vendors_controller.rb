@@ -18,7 +18,7 @@ class Api::V1::VendorsController < Api::V1::ApplicationController
     @vendor = Vendor.new(vendor_params)
     @vendor.company_id = current_company.id
     if @vendor.save
-      render :show, status: :created, location: @vendor
+      render json: @vendor.to_json, status: :ok
     else
       render json: @vendor.errors, status: :unprocessable_entity
     end
@@ -28,7 +28,7 @@ class Api::V1::VendorsController < Api::V1::ApplicationController
   # PATCH/PUT /vendors/1.json
   def update
     if @vendor.update(vendor_params)
-      render :show, status: :ok, location: @vendor
+      render json: @vendor.to_json, status: :ok
     else
       render json: @vendor.errors, status: :unprocessable_entity
     end

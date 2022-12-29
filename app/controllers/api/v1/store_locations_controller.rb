@@ -18,7 +18,7 @@ class Api::V1::StoreLocationsController < Api::V1::ApplicationController
     @store_location = StoreLocation.new(store_location_params)
 
     if @store_location.save
-      render :show, status: :created, location: @store_location
+      render json: @store_location.to_json, status: :ok
     else
       render json: @store_location.errors, status: :unprocessable_entity
     end
@@ -28,7 +28,7 @@ class Api::V1::StoreLocationsController < Api::V1::ApplicationController
   # PATCH/PUT /store_locations/1.json
   def update
     if @store_location.update(store_location_params)
-      render :show, status: :ok, location: @store_location
+      render json: @store_location.to_json, status: :ok
     else
       render json: @store_location.errors, status: :unprocessable_entity
     end
@@ -49,6 +49,5 @@ class Api::V1::StoreLocationsController < Api::V1::ApplicationController
     # Only allow a list of trusted parameters through.
     def store_location_params
       params.require(:store_location).permit(:company_id, :title, :code)
-
     end
 end
