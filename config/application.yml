@@ -1,0 +1,60 @@
+ulink_database_name: <%= ENV.fetch("database_name") { (Rails.application.credentials.database || {})[:database_name] } %>
+ulink_database_host: <%= ENV.fetch("database_host") { (Rails.application.credentials.database || {})[:host] } %>
+ulink_database_port: <%= ENV.fetch("database_port") { (Rails.application.credentials.database || {})[:port] } %>
+ulink_database_username: <%= ENV.fetch("database_username") { (Rails.application.credentials.database || {})[:username] } %>
+ulink_database_password: <%= ENV.fetch("database_password") { (Rails.application.credentials.database || {})[:password] } %>
+#ulink
+ulink_domain_name: <%= ENV.fetch("domain_name") { Rails.application.credentials.domain_name } %> #"http://localhost:7003"
+ulink_host_url: <%= ENV.fetch("host_url") { Rails.application.credentials.host_url } || "http://unif.me/" %> #"http://localhost:7003"
+ulink_api_link: <%= ENV.fetch("api_link") { Rails.application.credentials[:api_link] } %> #"http://localhost:7003"
+ulink_documentation_link: <%= ENV.fetch("documentation_link") { Rails.application.credentials[:documentation_link] } %> #"http://localhost:7003"
+ulink_redirect_key_length: <%= ENV.fetch("redirect_key_length") { Rails.application.credentials.redirect_key_length } %> #"http://localhost:7003
+#redis
+ulink_redis_cache_uri: <%= ENV.fetch("redis_cache_uri") { Rails.application.credentials.redis_cache&.dig(:redis_uri) } %> #"redis://redis:6379/3"
+ulink_locker_redis_uri: <%= ENV.fetch("locker_redis_uri") { Rails.application.credentials.locker&.dig(:redis_uri) } %> #"redis://redis:6379/4"
+#sidekiq
+ulink_sidekiq_redis_uri: <%= ENV.fetch("sidekiq_redis_uri") { Rails.application.credentials.sidekiq&.dig(:redis_uri) || "redis://redis:6379/3"} %> #"redis://redis:6379/5"
+ulink_sidekiq_basic_auth_username: <%= ENV.fetch("sidekiq_basic_auth_username") { "unifonic" } %> #'sidekiq'
+ulink_sidekiq_basic_auth_password: <%= ENV.fetch("sidekiq_basic_auth_password") { "wN4aNE" } %> # '1234'
+#unifonic_cloud
+ulink_jwt_secret_key: <%= ENV.fetch("jwt_secret_key") { "secretKey" } %>
+ulink_unifonic_cloud_base_url: <%= ENV.fetch("unifonic_cloud_base_url") { Rails.application.credentials.unifonic_cloud&.dig(:base_url) } %> #"https://cloud.unifonic.com"
+ulink_unifonic_cloud_client_id: <%= ENV.fetch("unifonic_cloud_client_id") { Rails.application.credentials.unifonic_cloud&.dig(:client_id) } %> #'123'
+ulink_unifonic_cloud_client_secret: <%= ENV.fetch("unifonic_cloud_client_secret") { Rails.application.credentials.unifonic_cloud&.dig(:client_secret) } %> #'21341'
+ulink_unifonic_cloud_auth_url: <%= ENV.fetch("unifonic_cloud_auth_url") { Rails.application.credentials.unifonic_cloud&.dig(:auth_url) } %> #'https://cloud.unifonic.com/oauth/v2/auth?response_type=code&client_id=%{client_id}&redirect_uri=%{redirect_uri}'
+ulink_unifonic_cloud_logout_url: <%= ENV.fetch("unifonic_cloud_logout_url") { Rails.application.credentials.unifonic_cloud&.dig(:logout_url) } %> #'https://cloud.unifonic.com/logout'
+ulink_unifonic_cloud_me_url: <%= ENV.fetch("unifonic_cloud_me_url") { Rails.application.credentials.unifonic_cloud&.dig(:me_url) } %> #'https://cloud.unifonic.com/app/api/v2/user/me'
+#nextgen
+ulink_nextgen_base_url: <%= ENV.fetch("nextgen_base_url") { (Rails.application.credentials.nextgen || {})[:base_url] } %> #'http://95.177.221.161:13001'
+ulink_nextgen_secret_key: <%= ENV.fetch("nextgen_secret_key") { (Rails.application.credentials.nextgen || {})[:secret_key] } %> #'123'
+ulink_nextgen_enabled: <%= ENV.fetch("nextgen_enabled") { (Rails.application.credentials.nextgen || {})[:enabled] } %> #false
+#frontend
+ulink_client_app_requests_origin: <%= ENV.fetch("client_app_requests_origin") { Rails.application.credentials.client_app_requests_origin } %> #'localhost:4202'
+ulink_disable_permission_check_all: <%= ENV.fetch("disable_permission_check_all") { Rails.application.credentials.disable_permission_check&.dig(:all) } %> #false
+ulink_frontend_check_login: <%= ENV.fetch("frontend_check_login") { Rails.application.credentials.frontend&.dig(:check_login) } %> #'http://localhost:4202/check_login'
+ulink_frontend_home_url: <%= ENV.fetch("frontend_home_url") { Rails.application.credentials.frontend&.dig(:home_url)} %> #'http://localhost:4202'
+
+#mailer
+# ulink_mailer_host: <%= ENV.fetch("mailer_host") { Rails.application.credentials.mailer&.dig(:host) } %> #"mailcatcher"
+# ulink_mailer_port: <%= ENV.fetch("mailer_port") { Rails.application.credentials.mailer&.dig(:port) } %> #"1025"
+# ulink_mailer_domain: <%= ENV.fetch("mailer_domain") { Rails.application.credentials.mailer&.dig(:domain) } %> #"http://localhost:7071"
+# ulink_mailer_authentication: <%= ENV.fetch("mailer_authentication") { Rails.application.credentials.mailer&.dig(:authentication) } %> #"plain"
+# ulink_mailer_username: <%= ENV.fetch("mailer_username") { Rails.application.credentials.mailer&.dig(:user_name) } %> #""
+# ulink_mailer_password: <%= ENV.fetch("mailer_password") { Rails.application.credentials.mailer&.dig(:password) } %> #""
+# ulink_mailer_from_email: <%= ENV.fetch("mailer_from_email") { Rails.application.credentials.mailer&.dig(:from_email) } %> #"admin@unifo.com"
+# ulink_mailer_exception_alert:  <%= ENV.fetch("mailer_exception_alert") { Rails.application.credentials.mailer&.dig(:exception_alert) } %> #"mumair-ext@unifonic.com"
+# #secrets
+# ulink_secret_key_base: <%= ENV.fetch("secret_key_base") { Rails.application.credentials.secret_key_base } %>
+# ulink_testing_secret: <%= ENV.fetch("testing_secret") {}%>
+# #aws
+# ulink_aws_region: <%= ENV.fetch("aws_region") { 'me-south-1' } %>
+# ulink_aws_access_key_id: <%= ENV.fetch("aws_access_key_id") { (Rails.application.credentials.aws || {})[:access_key_id] } %>
+# ulink_aws_secret_access_key: <%= ENV.fetch("aws_secret_access_key") { (Rails.application.credentials.aws || {})[:secret_access_key] } %>
+# ulink_aws_bucket: <%= ENV.fetch("aws_bucket") { (Rails.application.credentials.aws || {})[:bucket_name] } %>
+# ulink_aws_prefix: <%= ENV.fetch("aws_prefix") { (Rails.application.credentials.aws || {})[:prefix] } %>
+# #kafka
+# ulink_kafka_click_topic_name: <%= ENV.fetch("kafka_click_topic_name") { 'integration.ulink.linkVisit' } %>
+# ulink_kafka_ready_topic_name: <%= ENV.fetch("kafka_ready_topic_name") { 'integration.ulink.csvReady' } %>
+# ulink_kafka_flow_studio_topic_name: <%= ENV.fetch("kafka_flow_studio_topic_name") { 'integration.flowStudio.ulinkStatus' } %>
+# ulink_fs_kafka_url: <%= ENV.fetch("fs_kafka_url") { 'integration-kafka-opensource-cp-kafka-0.integration-kafka-opensource-cp-kafka-headless.integration-shared:9092' } %>
+# ulink_kafka_url: <%= ENV.fetch("kafka_url") { 'confluent-kafka.integration-shared.svc.cluster.local:9071' } %>

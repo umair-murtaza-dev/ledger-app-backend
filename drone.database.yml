@@ -1,0 +1,23 @@
+test:
+  adapter: mysql2
+  encoding: utf8mb4
+  collation: utf8mb4_bin
+  reconnect: false
+  pool: 50
+  database: '-ledger_test'
+  host: 'db'
+  port: 3306
+  password: root
+  username: root
+
+development:
+  adapter: mysql2
+  encoding: utf8mb4
+  collation: utf8mb4_bin
+  reconnect: false
+  pool: 50
+  database: '-ledger_test'
+  host: 'db'
+  port: 3306
+  password: root
+  username: root

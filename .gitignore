@@ -1,0 +1,26 @@
+# Ignore bundler config.
+/.bundle
+
+# Ignore all logfiles and tempfiles.
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+.DS_Store
+# Ignore uploaded files in development
+/storage/*
+!/storage/.keep
+
+.byebug_history
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key
+.docker/
+config/credentials.yml.enc
+db/schema.rb
+/config/credentials/integration.key
+/config/credentials/staging.key
+
+/config/credentials/live.key
+
+/config/credentials/production.key

@@ -1,0 +1,8 @@
+#!/bin/sh
+if [ "$1" = "start" ]; then
+  RAILS_ENV=production bundle exec puma -C /var/apps/unifonic-notice/current/config/puma.rb
+elif [ "$1" = "stop" ]; then
+  RAILS_ENV=production bundle exec pumactl -F /var/apps/unifonic-notice/current/config/puma.rb stop
+elif [ "$1" = "restart" ]; then
+  RAILS_ENV=production bundle exec pumactl -F /var/apps/unifonic-notice/current/config/puma.rb phased-restart
+fi

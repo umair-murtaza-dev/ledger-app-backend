@@ -1,0 +1,3 @@
+#!/bin/sh
+
+docker exec -it unifonic-tinyurl_app_1 bash

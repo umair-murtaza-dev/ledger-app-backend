@@ -1,0 +1,40 @@
+version: '3'
+services:
+  app:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    container_name: "ledger_app_1"
+    volumes:
+      - .:/ledger
+    ports:
+      - "7004:3000"
+    networks:
+      - ledger_network
+    links:
+      - db
+      - redis
+    depends_on:
+      - db
+      - redis
+  db:
+    image: "mysql:5.7"
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+       - "3306"
+    networks:
+      - ledger_network
+    volumes:
+      - mysql-data:/var/lib/mysql
+  redis:
+    image: redis
+    networks:
+      - ledger_network
+    ports:
+      - "6379"
+
+networks:
+  ledger_network:
+
+volumes:
+  mysql-data:
