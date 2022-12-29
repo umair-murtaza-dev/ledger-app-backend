@@ -1,5 +1,5 @@
 class Histories::HistoryService
-  include Common::Helpers::ServiceIdHelper
+  # include Common::Helpers::ServiceIdHelper
   include Common::Helpers::PaginationHelper
   include Common::Helpers::TranslationHelper
 

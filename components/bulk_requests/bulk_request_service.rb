@@ -1,5 +1,5 @@
 class BulkRequests::BulkRequestService
-  include Common::Helpers::ServiceIdHelper
+  # include Common::Helpers::ServiceIdHelper
   include Common::Helpers::PaginationHelper
   include Concurrent::Async
 

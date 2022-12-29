@@ -1,5 +1,5 @@
 class CustomDomains::CustomDomainService
-  include Common::Helpers::ServiceIdHelper
+  # include Common::Helpers::ServiceIdHelper
   include Common::Helpers::PaginationHelper
 
   def create(attributes:, check_enabled_api: false)

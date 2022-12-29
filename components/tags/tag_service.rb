@@ -1,5 +1,5 @@
 class Tags::TagService
-  include Common::Helpers::ServiceIdHelper
+  # include Common::Helpers::ServiceIdHelper
   include Common::Helpers::PaginationHelper
   include Common::Helpers::TranslationHelper
 

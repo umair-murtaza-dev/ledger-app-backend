@@ -1,5 +1,4 @@
 class UrlMappings::UrlMappingService
-  include Common::Helpers::ServiceIdHelper
   include Common::Helpers::PaginationHelper
 
   def create(attributes:, check_enabled_api: false)
@@ -151,7 +150,7 @@ class UrlMappings::UrlMappingService
       custom_domain: with_custom_domain == true ? mapping.custom_domain.present? ? mapping.custom_domain.host : nil : nil
     )
   end
-  
+
 
   def fetch_host_url
     ENV['ledger_host_url']

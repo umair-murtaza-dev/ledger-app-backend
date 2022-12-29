@@ -54,7 +54,17 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
-  database: <%= ENV["ledger_database_name"] %>
-  username: <%= ENV["ledger_database_username"] %>
-  password: <%= ENV["ledger_database_password"] %>
+  # <<: *default
+  adapter: mysql
+  encoding: utf8mb4
+  collation: utf8mb4_bin
+  reconnect: false
+  pool: 5
+  # host: <%= ENV["DATEBASE_URL"] %>
+  port: 3306
+  username: root
+  password:  root
+  url: <%= ENV['CLEARDB_DATABASE_URL'] %>
+  # database: <%= ENV["ledger_database_name"] %>
+  # username: <%= ENV["ledger_database_username"] %>
+  # password: <%= ENV["ledger_database_password"] %>

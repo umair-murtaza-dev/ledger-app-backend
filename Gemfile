@@ -5,6 +5,7 @@ ruby '2.7.5'
 
 gem 'rails', '~> 6.0.4.1'
 gem 'mysql2'
+gem 'activerecord-mysql2-adapter'
 gem 'devise'
 gem 'devise-jwt'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
