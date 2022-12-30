@@ -4,19 +4,25 @@ class Api::V1::ExpensesController < Api::V1::ApplicationController
   # GET /expenses
   # GET /expenses.json
   def index
-    @expenses = Expense.all
+    @vendors = current_company.expenses
   end
 
   # GET /expenses/1
   # GET /expenses/1.json
   def show
+    if @expense
+      render json: @expense.to_json, status: :ok
+    else
+      render json: 'not found', status: :not_found
+    end
   end
 
   # POST /expenses
   # POST /expenses.json
   def create
     @expense = Expense.new(expense_params)
-
+    @expense.user_id = current_user.id
+    @expense.company_id = current_company.id
     if @expense.save
       render json: @expense.to_json, status: :ok
     else
@@ -42,12 +48,12 @@ class Api::V1::ExpensesController < Api::V1::ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_expense
-      @expense = Expense.find(params[:id])
-    end
+  def set_expense
+    @expense = current_company.expenses.where(id: params[:id])&.first
+  end
 
-    # Only allow a list of trusted parameters through.
-    def expense_params
-      params.require(:head_of_account).permit(:company_id, :vendor_id, :head_of_account_id, :user_id, :amount, :description, :title, :sales_tax, :witholding_tax)
-    end
+  # Only allow a list of trusted parameters through.
+  def expense_params
+    params.require(:head_of_account).permit(:company_id, :vendor_id, :head_of_account_id, :user_id, :amount, :description, :title, :sales_tax, :witholding_tax)
+  end
 end

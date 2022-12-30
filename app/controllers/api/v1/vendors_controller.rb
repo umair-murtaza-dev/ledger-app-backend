@@ -10,6 +10,11 @@ class Api::V1::VendorsController < Api::V1::ApplicationController
   # GET /vendors/1
   # GET /vendors/1.json
   def show
+    if @vendor
+      render json: @vendor.to_json, status: :ok
+    else
+      render json: 'not found', status: :not_found
+    end
   end
 
   # POST /vendors
@@ -42,12 +47,12 @@ class Api::V1::VendorsController < Api::V1::ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_vendor
-      @vendor = current_company.vendors.where(id: params[:id])&.first
-    end
+  def set_vendor
+    @vendor = current_company.vendors.where(id: params[:id])&.first
+  end
 
-    # Only allow a list of trusted parameters through.
-    def vendor_params
-      params.require(:vendor).permit(:company_id, :title, :code, :address)
-    end
+  # Only allow a list of trusted parameters through.
+  def vendor_params
+    params.require(:vendor).permit(:company_id, :title, :code, :address)
+  end
 end

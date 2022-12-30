@@ -4,19 +4,24 @@ class Api::V1::StoreLocationsController < Api::V1::ApplicationController
   # GET /store_locations
   # GET /store_locations.json
   def index
-    @store_locations = StoreLocation.all
+    @store_locations = current_company.store_locations
   end
 
   # GET /store_locations/1
   # GET /store_locations/1.json
   def show
+    if @store_location
+      render json: @store_location.to_json, status: :ok
+    else
+      render json: 'not found', status: :not_found
+    end
   end
 
   # POST /store_locations
   # POST /store_locations.json
   def create
     @store_location = StoreLocation.new(store_location_params)
-
+    @store_location.company_id = current_company.id
     if @store_location.save
       render json: @store_location.to_json, status: :ok
     else
@@ -41,13 +46,13 @@ class Api::V1::StoreLocationsController < Api::V1::ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_store_location
-      @store_location = StoreLocation.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_store_location
+    @store_location = current_company.store_locations.where(id: params[:id])&.first
+  end
 
-    # Only allow a list of trusted parameters through.
-    def store_location_params
-      params.require(:store_location).permit(:company_id, :title, :code)
-    end
+  # Only allow a list of trusted parameters through.
+  def store_location_params
+    params.require(:store_location).permit(:company_id, :title, :code)
+  end
 end

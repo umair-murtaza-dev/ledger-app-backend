@@ -4,19 +4,24 @@ class Api::V1::HeadOfAccountsController < Api::V1::ApplicationController
   # GET /head_of_accounts
   # GET /head_of_accounts.json
   def index
-    @head_of_accounts = HeadOfAccount.all
+    @head_of_accounts = current_company.head_of_accounts
   end
 
-  # GET /head_of_accounts/1
-  # GET /head_of_accounts/1.json
+  # GET /vendors/1
+  # GET /vendors/1.json
   def show
+    if @head_of_account
+      render json: @head_of_account.to_json, status: :ok
+    else
+      render json: 'not found', status: :not_found
+    end
   end
 
   # POST /head_of_accounts
   # POST /head_of_accounts.json
   def create
     @head_of_account = HeadOfAccount.new(head_of_account_params)
-
+    @head_of_account.company_id = current_company.id
     if @head_of_account.save
       render json: @head_of_account.to_json, status: :ok
     else
@@ -43,7 +48,7 @@ class Api::V1::HeadOfAccountsController < Api::V1::ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_head_of_account
-      @head_of_account = HeadOfAccount.find(params[:id])
+      @head_of_account = current_company.head_of_accounts.where(id: params[:id])&.first
     end
 
     # Only allow a list of trusted parameters through.

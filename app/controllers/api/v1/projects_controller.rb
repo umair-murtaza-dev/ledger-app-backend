@@ -4,19 +4,24 @@ class Api::V1::ProjectsController < Api::V1::ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    @projects = current_company.projects
   end
 
   # GET /projects/1
   # GET /projects/1.json
   def show
+    if @project
+      render json: @project.to_json, status: :ok
+    else
+      render json: 'not found', status: :not_found
+    end
   end
 
   # POST /projects
   # POST /projects.json
   def create
     @project = Project.new(project_params)
-
+    @project.company_id = current_company.id
     if @project.save
       render json: @project.to_json, status: :ok
     else
@@ -43,7 +48,7 @@ class Api::V1::ProjectsController < Api::V1::ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
-      @project = Project.find(params[:id])
+      @projects = current_company.projects.where(id: params[:id])&.first
     end
 
     # Only allow a list of trusted parameters through.
