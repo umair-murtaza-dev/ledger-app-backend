@@ -10,8 +10,8 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
     origins '*'
 
     resource '*',
-      headers: :any,
-      expose: ['ETag', 'Authorization'],
+      headers: 'x-authorization-token',
+      expose: ['Authorization'],
       methods: [:get, :post, :put, :patch, :delete, :options, :head],
       credentials: false
   end
