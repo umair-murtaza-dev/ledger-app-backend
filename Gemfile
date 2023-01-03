@@ -26,7 +26,6 @@ gem 'paper_trail'
 gem 'httparty'
 gem 'curb', '~> 0.9.10'
 gem 'mimemagic'
-gem 'rack-protection'
 # translations
 gem "globalize", "~> 5.3.0"
 gem "globalize-accessors", "~> 0.2.1"
