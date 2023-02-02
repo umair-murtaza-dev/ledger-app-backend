@@ -5,6 +5,7 @@ class Api::V1::ExpensesController < Api::V1::ApplicationController
   # GET /expenses.json
   def index
     @vendors = current_company.expenses
+    paginate json: @vendors
   end
 
   # GET /expenses/1
@@ -54,6 +55,6 @@ class Api::V1::ExpensesController < Api::V1::ApplicationController
 
   # Only allow a list of trusted parameters through.
   def expense_params
-    params.require(:head_of_account).permit(:company_id, :vendor_id, :head_of_account_id, :user_id, :amount, :description, :title, :sales_tax, :witholding_tax)
+    params.require(:expense).permit(:vendor_id, :head_of_account_id, :amount, :description, :title, :sales_tax, :witholding_tax)
   end
 end

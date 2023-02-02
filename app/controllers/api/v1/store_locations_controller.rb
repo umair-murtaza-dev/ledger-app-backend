@@ -5,6 +5,7 @@ class Api::V1::StoreLocationsController < Api::V1::ApplicationController
   # GET /store_locations.json
   def index
     @store_locations = current_company.store_locations
+    paginate json: @store_locations
   end
 
   # GET /store_locations/1
@@ -53,6 +54,6 @@ class Api::V1::StoreLocationsController < Api::V1::ApplicationController
 
   # Only allow a list of trusted parameters through.
   def store_location_params
-    params.require(:store_location).permit(:company_id, :title, :code)
+    params.require(:store_location).permit(:code, :manager_id)
   end
 end
