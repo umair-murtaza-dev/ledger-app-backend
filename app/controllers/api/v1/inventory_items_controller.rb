@@ -5,6 +5,7 @@ class Api::V1::InventoryItemsController < Api::V1::ApplicationController
   # GET /inventory_items.json
   def index
     @inventory_items = current_company.inventory_items
+    paginate json: @inventory_items
   end
 
   # GET /inventory_items/1
@@ -48,11 +49,11 @@ class Api::V1::InventoryItemsController < Api::V1::ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_inventory_item
-      @inventory_items = current_company.inventory_items.where(id: params[:id])&.first
+      @inventory_item = current_company.inventory_items.where(id: params[:id])&.first
     end
 
     # Only allow a list of trusted parameters through.
     def inventory_item_params
-      params.require(:inventory_item).permit(:company_id, :code, :title, :description)
+      params.require(:inventory_item).permit(:code, :title, :description)
     end
 end

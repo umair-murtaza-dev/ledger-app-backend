@@ -5,6 +5,7 @@ class Api::V1::HeadOfAccountsController < Api::V1::ApplicationController
   # GET /head_of_accounts.json
   def index
     @head_of_accounts = current_company.head_of_accounts
+    paginate json: @head_of_accounts
   end
 
   # GET /vendors/1
@@ -53,6 +54,6 @@ class Api::V1::HeadOfAccountsController < Api::V1::ApplicationController
 
     # Only allow a list of trusted parameters through.
     def head_of_account_params
-      params.require(:head_of_account).permit(:company_id, :code, :title)
+      params.require(:head_of_account).permit(:code, :title)
     end
 end
