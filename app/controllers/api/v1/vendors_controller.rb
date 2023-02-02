@@ -5,6 +5,7 @@ class Api::V1::VendorsController < Api::V1::ApplicationController
   # GET /vendors.json
   def index
     @vendors = current_company.vendors
+    paginate json: @vendors, per_page: 10
   end
 
   # GET /vendors/1
@@ -42,7 +43,7 @@ class Api::V1::VendorsController < Api::V1::ApplicationController
   # DELETE /vendors/1
   # DELETE /vendors/1.json
   def destroy
-    @vendor.destroy
+    @vendor&.destroy
   end
 
   private

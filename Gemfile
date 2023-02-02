@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.5'
+ruby '2.5.1'
 
-gem 'rails', '~> 6.0.4.1'
+gem 'rails', '~> 6.0.4.8'
 # gem 'mysql2'
 
 gem 'pg'
@@ -11,6 +11,9 @@ gem 'devise'
 gem 'devise-jwt'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.9'
+
+gem 'jsonapi-serializer'
+gem "jsonapi-rails"
 gem 'aws-sdk-s3', '~> 1'
 gem 'paperclip'
 gem 'kaminari'
@@ -37,8 +40,7 @@ gem 'msgpack'
 # fixed snyk Vulnerabilities
 gem "json", ">= 2.3.0"
 gem 'puma', '~> 5.2'
-gem 'rswag-api'
-gem 'rswag-ui'
+gem "rswag"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -64,6 +66,10 @@ gem 'figaro'
 gem 'language_filter' #block offensive words
 
 gem 'ruby-kafka'
+
+gem 'grape', '>= 0.10.0'
+
+gem 'api-pagination'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -5,6 +5,7 @@ class Api::V1::ProjectsController < Api::V1::ApplicationController
   # GET /projects.json
   def index
     @projects = current_company.projects
+    paginate json: @projects
   end
 
   # GET /projects/1
@@ -48,11 +49,11 @@ class Api::V1::ProjectsController < Api::V1::ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
-      @projects = current_company.projects.where(id: params[:id])&.first
+      @project = current_company.projects.where(id: params[:id])&.first
     end
 
     # Only allow a list of trusted parameters through.
     def project_params
-      params.require(:store_location).permit(:company_id, :title, :start_date, :end_date)
+      params.require(:project).permit(:title, :start_date, :end_date)
     end
 end
