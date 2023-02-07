@@ -469,7 +469,7 @@ DEPENDENCIES
   pg
   puma (~> 5.2)
   rack-cors
-  rails (~> 6.0.4.8)
+  rails (~> 6.0.4.1)
   rspec-rails
   rswag
   rswag-specs
@@ -484,7 +484,7 @@ DEPENDENCIES
   yard
 
 RUBY VERSION
-   ruby 2.5.1p57
+   ruby 2.7.5p203
 
 BUNDLED WITH
-   2.3.26
+   2.4.6
