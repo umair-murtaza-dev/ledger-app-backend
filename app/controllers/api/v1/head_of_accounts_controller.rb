@@ -43,7 +43,11 @@ class Api::V1::HeadOfAccountsController < Api::V1::ApplicationController
   # DELETE /head_of_accounts/1
   # DELETE /head_of_accounts/1.json
   def destroy
-    @head_of_account.destroy
+    if @head_of_account.present?
+      @head_of_account.destroy
+    else
+      render json: {error_message: "head of account can not be found"}, status: :not_found
+    end
   end
 
   private

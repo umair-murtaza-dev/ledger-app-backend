@@ -44,7 +44,11 @@ class Api::V1::ExpensesController < Api::V1::ApplicationController
   # DELETE /expenses/1
   # DELETE /expenses/1.json
   def destroy
-    @expense.destroy
+    if @expense.present?
+      @expense.destroy
+    else
+      render json: {error_message: "expense can not be found"}, status: :not_found
+    end
   end
 
   private

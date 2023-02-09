@@ -43,7 +43,11 @@ class Api::V1::ProjectsController < Api::V1::ApplicationController
   # DELETE /projects/1
   # DELETE /projects/1.json
   def destroy
-    @project.destroy
+    if @project.present?
+      @project.destroy
+    else
+      render json: {error_message: "project can not be found"}, status: :not_found
+    end
   end
 
   private

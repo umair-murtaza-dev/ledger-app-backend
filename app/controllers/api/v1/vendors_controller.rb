@@ -43,7 +43,11 @@ class Api::V1::VendorsController < Api::V1::ApplicationController
   # DELETE /vendors/1
   # DELETE /vendors/1.json
   def destroy
-    @vendor&.destroy
+    if @vendor.present?
+      @vendor.destroy
+    else
+      render json: {error_message: "vendor can not be found"}, status: :not_found
+    end
   end
 
   private
