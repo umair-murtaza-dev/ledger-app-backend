@@ -43,7 +43,11 @@ class Api::V1::StoreLocationsController < Api::V1::ApplicationController
   # DELETE /store_locations/1
   # DELETE /store_locations/1.json
   def destroy
-    @store_location.destroy
+    if @store_location.present?
+      @store_location.destroy
+    else
+      render json: {error_message: "store location can not be found"}, status: :not_found
+    end
   end
 
   private

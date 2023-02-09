@@ -43,7 +43,11 @@ class Api::V1::InventoryLocationsController < Api::V1::ApplicationController
   # DELETE /inventory_locations/1
   # DELETE /inventory_locations/1.json
   def destroy
-    @inventory_location.destroy
+    if @inventory_location.present?
+      @inventory_location.destroy
+    else
+      render json: {error_message: "inventory location can not be found"}, status: :not_found
+    end
   end
 
   private
