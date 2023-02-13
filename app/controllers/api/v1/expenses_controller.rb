@@ -4,15 +4,18 @@ class Api::V1::ExpensesController < Api::V1::ApplicationController
   # GET /expenses
   # GET /expenses.json
   def index
-    @vendors = current_company.expenses
-    paginate json: @vendors
+    @expenses = current_company.expenses
+    @expenses = paginate @expenses, per_page: 10
+    @vendors = Vendor.where(id: Expense.pluck(:vendor_id))
+    @heads = HeadOfAccount.where(id: Expense.pluck(:head_of_account_id))
+    render json: {data: @expenses, count: @expenses.count, heads: @heads, vendors: @vendors}
   end
 
   # GET /expenses/1
   # GET /expenses/1.json
   def show
     if @expense
-      render json: @expense.to_json, status: :ok
+      render json: {data: @expense, head: @expense.head_of_account, vendor: @expense.vendor}, status: :ok
     else
       render json: 'not found', status: :not_found
     end
