@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::API
   include ActionController::HttpAuthentication::Token::ControllerMethods
+  include ActionController::MimeResponds
   # protect_from_forgery with: :null_session
   # before_action :underscore_params!
 
