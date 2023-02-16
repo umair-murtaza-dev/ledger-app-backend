@@ -16,13 +16,13 @@ Rails.application.configure do
   # Run rails dev:cache to toggle caching.
   if Rails.root.join('tmp', 'caching-dev.txt').exist?
     config.action_controller.perform_caching = true
-    # config.cache_store = :redis_cache_store, { url: ENV['ledger_redis_cache_uri'] }
+    config.cache_store = :redis_cache_store, { url: ENV['redis_cache_uri'] }
     config.public_file_server.headers = {
       'Cache-Control' => "public, max-age=#{2.days.to_i}"
     }
   else
     config.action_controller.perform_caching = true
-    # config.cache_store = :redis_cache_store, { url: ENV['ledger_redis_cache_uri'] }
+    config.cache_store = :redis_cache_store, { url: ENV['redis_cache_uri'] }
   end
 
   # Store uploaded files on the local file system (see config/storage.yml for options).

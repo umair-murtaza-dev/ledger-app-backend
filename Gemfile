@@ -1,15 +1,13 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.5.1'
+ruby '2.7.5'
 
 gem 'rails', '~> 6.0.4.8'
-# gem 'mysql2'
+gem 'mysql2'
 
-gem 'pg'
 gem 'devise'
 gem 'devise-jwt'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.9'
 
 gem 'jsonapi-serializer'
@@ -28,7 +26,6 @@ gem 'acts_as_paranoid'
 gem 'paper_trail'
 gem 'httparty'
 gem 'curb', '~> 0.9.10'
-gem 'mimemagic'
 # translations
 gem "globalize", "~> 5.3.0"
 gem "globalize-accessors", "~> 0.2.1"
@@ -58,6 +55,12 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'rack-cors'
 gem "lograge"
 
+gem "sidekiq", '~> 6.2.1'
+gem "sidekiq-cron"
+gem 'redis-rails'
+gem 'redis'
+gem 'hiredis'
+gem 'redis-namespace'
 
 gem "browser" # This gem is used for grabbing browser details
 

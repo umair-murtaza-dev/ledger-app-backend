@@ -25,7 +25,7 @@ module Ledger
     config.load_defaults 6.0
     config.autoload_paths += %w[components lib].map { |dir| "#{config.root}/#{dir}" }
     config.eager_load_paths += %w[components].map { |dir| "#{config.root}/#{dir}" }
-    # config.cache_store = :redis_cache_store, { url: ENV['ledger_redis_cache_uri']}
+    config.cache_store = :redis_cache_store, { url: ENV['redis_cache_uri']}
     console do
       Rails.logger.level = :debug
     end
@@ -39,7 +39,7 @@ module Ledger
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
-    # config.active_job.queue_adapter = :sidekiq
+    config.active_job.queue_adapter = :sidekiq
     config.paperclip_defaults = {
       :storage => :s3,
       :preserve_files => true,
