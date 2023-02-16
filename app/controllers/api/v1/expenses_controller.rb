@@ -6,7 +6,7 @@ class Api::V1::ExpensesController < Api::V1::ApplicationController
   def index
     @expenses = current_company.expenses
     @expenses = paginate @expenses, per_page: 10
-    render json: @expenses
+    render json: {data: @expenses, csv_file_link: ENV['CSV_FILE_PATH']}
   end
 
   # GET /expenses/1

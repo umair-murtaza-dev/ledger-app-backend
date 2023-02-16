@@ -4,10 +4,6 @@ class Expense < ApplicationRecord
   belongs_to :head_of_account
   belongs_to :user
 
-  def file_link
-    
-  end
-
   def attributes
   {
     'id' => id,
@@ -19,8 +15,7 @@ class Expense < ApplicationRecord
     'created_at' => created_at,
     'vendor' => vendor.attributes,
     'head_of_account' => head_of_account,
-    'user' => user,
-    'file_link' => file_link
+    'user' => user
   }
   end
 end
