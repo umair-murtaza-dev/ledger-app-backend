@@ -5,7 +5,8 @@ class Api::V1::VendorsController < Api::V1::ApplicationController
   # GET /vendors.json
   def index
     @vendors = current_company.vendors
-    paginate json: @vendors, per_page: 10
+    @vendors = paginate @vendors, per_page: 10
+    render json: @vendors, include: [:expenses]
   end
 
   # GET /vendors/1

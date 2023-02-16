@@ -1,0 +1,5 @@
+<%- headers = ['Title', 'Amount', 'Sales Tax', 'Withholding Tax', 'Date'] -%>
+<%= CSV.generate_line headers %>
+<%- @expenses.each do |expense| -%>
+  <%= CSV.generate_line([expense.title, expense.amount, expense.sales_tax, expense.witholding_tax, expense.created_at]) -%>
+<%- end -%>

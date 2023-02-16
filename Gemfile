@@ -41,6 +41,7 @@ gem 'msgpack'
 gem "json", ">= 2.3.0"
 gem 'puma', '~> 5.2'
 gem "rswag"
+gem "dotenv-rails"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

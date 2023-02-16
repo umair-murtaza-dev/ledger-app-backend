@@ -6,16 +6,14 @@ class Api::V1::ExpensesController < Api::V1::ApplicationController
   def index
     @expenses = current_company.expenses
     @expenses = paginate @expenses, per_page: 10
-    @vendors = Vendor.where(id: Expense.pluck(:vendor_id))
-    @heads = HeadOfAccount.where(id: Expense.pluck(:head_of_account_id))
-    render json: {data: @expenses, count: @expenses.count, heads: @heads, vendors: @vendors}
+    render json: {data: @expenses, csv_file_link: ENV['CSV_FILE_PATH']}
   end
 
   # GET /expenses/1
   # GET /expenses/1.json
   def show
     if @expense
-      render json: {data: @expense, head: @expense.head_of_account, vendor: @expense.vendor}, status: :ok
+      render json: @expense.attributes
     else
       render json: 'not found', status: :not_found
     end
