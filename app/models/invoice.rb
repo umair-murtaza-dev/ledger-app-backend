@@ -5,7 +5,7 @@ class Invoice < ApplicationRecord
   has_one_attached :attachment
 
   def attachment_url
-    # ActiveStorage::Current.host = "http://localhost:3000" #uncomment to fix dev error
+    ActiveStorage::Current.host = ENV['ROOT_PATH']
     attachment.present? ? attachment.service_url : nil
   end
 
