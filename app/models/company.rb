@@ -6,5 +6,7 @@ class Company < ApplicationRecord
   has_many :inventory_locations, dependent: :destroy
   has_many :projects, dependent: :destroy
   has_many :store_locations, dependent: :destroy
+  has_many :invoices
 
+  has_one_attached :logo
 end
