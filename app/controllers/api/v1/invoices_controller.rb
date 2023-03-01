@@ -76,6 +76,6 @@ class Api::V1::InvoicesController < Api::V1::ApplicationController
 
   # Only allow a list of trusted parameters through.
   def invoice_params
-    params.require(:invoice).permit(:from_name, :from_address, :from_phone,:to_name, :to_address, :to_phone, :currency, :amount, :tax_percentage, :discount_percentage)
+    params.require(:invoice).permit(:amount, :tax_percentage, :discount_percentage, :customer_id)
   end
 end
