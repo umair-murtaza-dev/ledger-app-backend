@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       resources :inventory_items, except: :edit
       resources :store_locations, except: :edit
       resources :inventory_locations, except: :edit
+      resources :customers, except: :edit
       resources :invoices, except: :edit do
         member do
           patch :upload_attachment
