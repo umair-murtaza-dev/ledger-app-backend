@@ -1,5 +1,5 @@
 class Api::V1::ExpensesController < Api::V1::ApplicationController
-  before_action :set_expense, only: %i[ show update destroy ]
+  before_action :set_expense, only: %i[ show update destroy upload_attachment]
 
   # GET /expenses
   # GET /expenses.json
@@ -52,10 +52,27 @@ class Api::V1::ExpensesController < Api::V1::ApplicationController
     end
   end
 
+  def upload_attachment
+    validates_attachment = Attachment.validates_attachment(params[:attachment])
+    return render json: {error_message: validates_attachment}, status: :unprocessable_entity if validates_attachment.is_a?(String)
+
+    image = MiniMagick::Image.new(params[:attachment].tempfile.path)
+    image.resize "512x512"
+    image.format "jpg" unless ['image/jpeg'].include?(params[:attachment].content_type)
+    file_name =  ['image/jpeg'].include?(params[:attachment].content_type) ? params[:attachment].original_filename : params[:attachment].original_filename.gsub("png", "jpg")
+
+    @expense_attachment = Attachment.find_by(attachment_for: @expense)
+    @expense_attachment = Attachment.create(company: current_company, attachment_for: @expense) unless @expense_attachment.present?
+    if @expense_attachment.attachment.attach io: StringIO.open(image.to_blob), filename: file_name, content_type: image.data["mimeType"], identify: false
+      return render json: @expense
+    end
+    render json: @expense, status: :unprocessable_entity
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
   def set_expense
-    @expense = current_company.expenses.where(id: params[:id])&.first
+    @expense = current_company.expenses.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.

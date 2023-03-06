@@ -3,12 +3,21 @@ class Invoice < ApplicationRecord
   belongs_to :user
   belongs_to :customer
 
-  has_one_attached :attachment
+  has_one :attachment
 
   def attachment_url
+    invoice_attachment = Attachment.find_by(attachment_for: self)
+    return nil unless invoice_attachment.present?
+
     ActiveStorage::Current.host = ENV['ROOT_PATH']
-    attachment.present? ? attachment.service_url : nil
+    invoice_attachment.attachment.present? ? invoice_attachment.attachment.service_url : nil
   end
+
+  enum status: {
+    active: 1,
+    paid: 2,
+    non_paid: 3
+  }, _prefix: true
 
   def attributes
   {

@@ -53,17 +53,18 @@ class Api::V1::InvoicesController < Api::V1::ApplicationController
   end
 
   def upload_attachment
-    return render json: {error_message: "file not attached"}, status: :unprocessable_entity unless params[:attachment].present?
-    return render json: {error_message: "size needs to be less than 5MB"}, status: :unprocessable_entity if params[:attachment].size > 5.megabytes
-    return render json: {error_message: "file format invalid"}, status: :unprocessable_entity unless ['image/jpeg', 'image/jpg', 'image/png'].include?(params[:attachment].content_type)
+    validates_attachment = Attachment.validates_attachment(params[:attachment])
+    return render json: {error_message: validates_attachment}, status: :unprocessable_entity if validates_attachment.is_a?(String)
 
     image = MiniMagick::Image.new(params[:attachment].tempfile.path)
     image.resize "512x512"
     image.format "jpg" unless ['image/jpeg'].include?(params[:attachment].content_type)
     file_name =  ['image/jpeg'].include?(params[:attachment].content_type) ? params[:attachment].original_filename : params[:attachment].original_filename.gsub("png", "jpg")
 
-    if @invoice.attachment.attach io: StringIO.open(image.to_blob), filename: file_name, content_type: image.data["mimeType"], identify: false
-      return render json: @invoice.attributes
+    @invoice_attachment = Attachment.find_by(attachment_for: @invoice)
+    @invoice_attachment = Attachment.create(company: current_company, attachment_for: @invoice) unless @invoice_attachment.present?
+    if @invoice_attachment.attachment.attach io: StringIO.open(image.to_blob), filename: file_name, content_type: image.data["mimeType"], identify: false
+      return render json: @invoice_attachment
     end
     render json: @invoice, status: :unprocessable_entity
   end
