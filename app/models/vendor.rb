@@ -5,7 +5,9 @@ class Vendor < ApplicationRecord
   def attributes
   {
     'id' => self.id,
-    'title' => title
+    'title' => title,
+    'code' => code,
+    'address' => address
   }
   end
 end
