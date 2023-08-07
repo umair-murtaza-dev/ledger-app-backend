@@ -31,7 +31,7 @@ class Api::V1::ApplicationController < ActionController::API
   end
 
   def current_user
-    @current_user || User.find(@current_user_id)
+    @current_user || User.find_by(id: @current_user_id)
   end
 
   def signed_in?
