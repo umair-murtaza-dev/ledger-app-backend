@@ -1,4 +1,6 @@
 class Expense < ApplicationRecord
+  acts_as_paranoid
+  
   belongs_to :company
   belongs_to :vendor
   belongs_to :head_of_account
