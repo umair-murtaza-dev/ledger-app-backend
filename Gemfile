@@ -21,6 +21,7 @@ gem 'yard'
 gem "faraday" #, '~> 0.8'
 gem 'httpclient'
 gem "jwt"
+gem "paranoia"
 
 # zip files
 gem 'rubyzip'

@@ -1,4 +1,6 @@
 class Customer < ApplicationRecord
+  acts_as_paranoid
+  
   belongs_to :company
   has_many :invoices
 
