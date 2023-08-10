@@ -4,7 +4,7 @@ class Api::V1::InvoicesController < Api::V1::ApplicationController
   # GET /invoices
   # GET /invoices.json
   def index
-    @invoices = current_company.invoices
+    @invoices = current_company.invoices.order(:amount, :total_amount)
     @invoices = @invoices.apply_filter(params[:search_query]) if params[:search_query].present?
     @invoices = paginate @invoices, per_page: 20
     render json: @invoices

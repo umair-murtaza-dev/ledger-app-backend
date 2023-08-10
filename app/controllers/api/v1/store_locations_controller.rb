@@ -4,7 +4,7 @@ class Api::V1::StoreLocationsController < Api::V1::ApplicationController
   # GET /store_locations
   # GET /store_locations.json
   def index
-    @store_locations = current_company.store_locations
+    @store_locations = current_company.store_locations.order(:code)
     @store_locations = @store_locations.apply_filter(params[:search_query]) if params[:search_query].present?
     paginate json: @store_locations, per_page: 20
   end
