@@ -1,0 +1,5 @@
+<%- headers = ['ID', 'Code', 'Manager'] -%>
+<%= CSV.generate_line headers %>
+<%- @store_locations.each do |store_location| -%>
+  <%= CSV.generate_line([store_location.id, store_location.code, store_location.manager_id]) -%>
+<%- end -%>

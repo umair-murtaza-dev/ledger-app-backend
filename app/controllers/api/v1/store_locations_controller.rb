@@ -6,7 +6,8 @@ class Api::V1::StoreLocationsController < Api::V1::ApplicationController
   def index
     @store_locations = current_company.store_locations.order(:code)
     @store_locations = @store_locations.apply_filter(params[:search_query]) if params[:search_query].present?
-    paginate json: @store_locations, per_page: 20
+    @store_locations = paginate @store_locations, per_page: 20
+    render json: {data: @store_locations, csv_file_link: ENV['STORE_LOCATIONS_CSV_EXPORT_PATH']}
   end
 
   # GET /store_locations/1

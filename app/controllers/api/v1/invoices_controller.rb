@@ -7,7 +7,7 @@ class Api::V1::InvoicesController < Api::V1::ApplicationController
     @invoices = current_company.invoices.order(:amount, :total_amount)
     @invoices = @invoices.apply_filter(params[:search_query]) if params[:search_query].present?
     @invoices = paginate @invoices, per_page: 20
-    render json: @invoices
+    render json: {data: @invoices, csv_file_link: ENV['INVOICES_CSV_EXPORT_PATH']}
   end
 
   # GET /invoices/1

@@ -7,7 +7,7 @@ class Api::V1::VendorsController < Api::V1::ApplicationController
     @vendors = current_company.vendors.order(:title, :code)
     @vendors = @vendors.apply_filter(params[:search_query]) if params[:search_query].present?
     @vendors = paginate @vendors, per_page: 20
-    render json: @vendors, include: [:expenses]
+    render json: {data: @vendors, csv_file_link: ENV['VENDORS_CSV_EXPORT_PATH']}, include: [:expenses]
   end
 
   # GET /vendors/1
