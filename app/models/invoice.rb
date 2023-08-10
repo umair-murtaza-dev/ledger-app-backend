@@ -1,6 +1,6 @@
 class Invoice < ApplicationRecord
   acts_as_paranoid
-  
+
   belongs_to :company
   belongs_to :user
   belongs_to :customer
@@ -34,5 +34,11 @@ class Invoice < ApplicationRecord
     'customer' => customer,
     'attachment_url': attachment_url
   }
+  end
+
+  def self.apply_filter(query)
+    invoices = where(status: "#{query}") if statuses.keys.include?("#{query}")
+    invoices = joins(:customer).where("customers.firstname ILIKE :term OR customers.lastname ILIKE :term", term: "%#{query}%") unless invoices.present?
+    invoices
   end
 end

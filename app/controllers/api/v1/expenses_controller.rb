@@ -5,7 +5,8 @@ class Api::V1::ExpensesController < Api::V1::ApplicationController
   # GET /expenses.json
   def index
     @expenses = current_company.expenses
-    @expenses = paginate @expenses, per_page: 10
+    @expenses = @expenses.apply_filter(params[:search_query]) if params[:search_query].present?
+    @expenses = paginate @expenses, per_page: 20
     render json: {data: @expenses, csv_file_link: ENV['CSV_FILE_PATH']}
   end
 
