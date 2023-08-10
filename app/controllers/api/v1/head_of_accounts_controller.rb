@@ -5,7 +5,8 @@ class Api::V1::HeadOfAccountsController < Api::V1::ApplicationController
   # GET /head_of_accounts.json
   def index
     @head_of_accounts = current_company.head_of_accounts
-    paginate json: @head_of_accounts
+    @head_of_accounts = @head_of_accounts.apply_filter(params[:search_query]) if params[:search_query].present?
+    paginate json: @head_of_accounts, per_page: 20
   end
 
   # GET /vendors/1

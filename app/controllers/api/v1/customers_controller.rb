@@ -5,7 +5,8 @@ class Api::V1::CustomersController < Api::V1::ApplicationController
   # GET /customers.json
   def index
     @customers = current_company.customers
-    paginate json: @customers
+    @customers = @customers.apply_filter(params[:search_query]) if params[:search_query].present?
+    paginate json: @customers, per_page: 20
   end
 
   # GET /customers/1

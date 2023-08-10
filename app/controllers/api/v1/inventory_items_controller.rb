@@ -5,7 +5,8 @@ class Api::V1::InventoryItemsController < Api::V1::ApplicationController
   # GET /inventory_items.json
   def index
     @inventory_items = current_company.inventory_items
-    paginate json: @inventory_items
+    @inventory_items = @inventory_items.apply_filter(params[:search_query]) if params[:search_query].present?
+    paginate json: @inventory_items, per_page: 20
   end
 
   # GET /inventory_items/1
