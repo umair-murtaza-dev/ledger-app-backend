@@ -4,7 +4,7 @@ class Api::V1::ProjectsController < Api::V1::ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = current_company.projects
+    @projects = current_company.projects.order(:title, :start_date)
     @projects = @projects.apply_filter(params[:search_query]) if params[:search_query].present?
     paginate json: @projects, per_page: 20
   end
