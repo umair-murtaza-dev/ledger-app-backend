@@ -6,7 +6,8 @@ class Api::V1::ProjectsController < Api::V1::ApplicationController
   def index
     @projects = current_company.projects.order(:title, :start_date)
     @projects = @projects.apply_filter(params[:search_query]) if params[:search_query].present?
-    paginate json: @projects, per_page: 20
+    @projects = paginate @projects, per_page: 20
+    render json: {data: @projects, csv_file_link: ENV['PROJECTS_CSV_EXPORT_PATH']}
   end
 
   # GET /projects/1

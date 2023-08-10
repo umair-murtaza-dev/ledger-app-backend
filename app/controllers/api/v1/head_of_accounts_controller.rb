@@ -6,7 +6,9 @@ class Api::V1::HeadOfAccountsController < Api::V1::ApplicationController
   def index
     @head_of_accounts = current_company.head_of_accounts.order(:title, :code)
     @head_of_accounts = @head_of_accounts.apply_filter(params[:search_query]) if params[:search_query].present?
-    paginate json: @head_of_accounts, per_page: 20
+    # paginate json: @head_of_accounts, per_page: 20
+    @head_of_accounts = paginate @head_of_accounts, per_page: 20
+    render json: {data: @head_of_accounts, csv_file_link: ENV['HEAD_OF_ACCOUNTS_CSV_EXPORT_PATH']}
   end
 
   # GET /vendors/1
