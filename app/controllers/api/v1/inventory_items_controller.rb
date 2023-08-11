@@ -4,7 +4,7 @@ class Api::V1::InventoryItemsController < Api::V1::ApplicationController
   # GET /inventory_items
   # GET /inventory_items.json
   def index
-    @inventory_items = current_company.inventory_items.order(:title, :code)
+    @inventory_items = current_company.inventory_items.order("#{params[:order_by]} #{params[:direction]}")
     @inventory_items = @inventory_items.apply_filter(params[:search_query]) if params[:search_query].present?
     @inventory_items = paginate @inventory_items, per_page: 20
     render json: {data: @inventory_items, csv_file_link: ENV['INVENTORY_ITEMS_CSV_EXPORT_PATH']}
