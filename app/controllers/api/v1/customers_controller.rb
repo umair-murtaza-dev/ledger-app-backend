@@ -4,7 +4,7 @@ class Api::V1::CustomersController < Api::V1::ApplicationController
   # GET /customers
   # GET /customers.json
   def index
-    @customers = current_company.customers.order(:firstname, :lastname)
+    @customers = current_company.customers.order("#{params[:order_by]} #{params[:direction]}")
     @customers = @customers.apply_filter(params[:search_query]) if params[:search_query].present?
     @customers = paginate @customers, per_page: 20
     render json: {data: @customers, csv_file_link: ENV['CUSTOMERS_CSV_EXPORT_PATH']}
