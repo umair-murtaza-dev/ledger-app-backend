@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   acts_as_paranoid
-  
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable,
@@ -9,6 +9,7 @@ class User < ApplicationRecord
          jwt_revocation_strategy: JwtDenylist
   belongs_to :company
   has_many :expenses
+  has_many :invoices
 
   # def jwt
   #   Warden::JWTAuth::UserEncoder.new.call(self, :user, 'aud')&.first
@@ -24,7 +25,8 @@ class User < ApplicationRecord
   {
     'id' => self.id,
     'firstname' => firstname,
-    'lastname' => lastname
+    'lastname' => lastname,
+    'email' => email
   }
   end
 

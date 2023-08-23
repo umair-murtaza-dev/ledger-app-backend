@@ -55,7 +55,8 @@ class Api::V1::CustomersController < Api::V1::ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_customer
-      @customer = current_company.customers.find(params[:id])
+      @customer = current_company.customers.find_by(id: params[:id])
+      render json: {error_message: "customer can not be found"}, status: :not_found unless @customer.present?
     end
 
     # Only allow a list of trusted parameters through.

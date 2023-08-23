@@ -56,6 +56,7 @@ class Api::V1::StoreLocationsController < Api::V1::ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_store_location
     @store_location = current_company.store_locations.where(id: params[:id])&.first
+    render json: {error_message: "store_location can not be found"}, status: :not_found unless @store_location.present?
   end
 
   # Only allow a list of trusted parameters through.

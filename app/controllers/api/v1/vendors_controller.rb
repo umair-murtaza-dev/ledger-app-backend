@@ -56,6 +56,7 @@ class Api::V1::VendorsController < Api::V1::ApplicationController
     # Use callbacks to share common setup or constraints between actions.
   def set_vendor
     @vendor = current_company.vendors.where(id: params[:id])&.first
+    render json: {error_message: "vendor can not be found"}, status: :not_found unless @vendor.present?
   end
 
   # Only allow a list of trusted parameters through.

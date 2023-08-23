@@ -56,6 +56,7 @@ class Api::V1::ProjectsController < Api::V1::ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_project
       @project = current_company.projects.where(id: params[:id])&.first
+      render json: {error_message: "project can not be found"}, status: :not_found unless @project.present?
     end
 
     # Only allow a list of trusted parameters through.
