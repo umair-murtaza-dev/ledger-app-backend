@@ -1,5 +1,5 @@
 class Api::V1::UsersController < Api::V1::ApplicationController
-  # before_action :authenticate_admin
+  before_action :authenticate_company_admin
   before_action :set_user, only: %i[ show update destroy ]
 
   # GET /users

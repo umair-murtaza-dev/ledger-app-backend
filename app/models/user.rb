@@ -7,7 +7,9 @@ class User < ApplicationRecord
          :jwt_authenticatable,
          :registerable,
          jwt_revocation_strategy: JwtDenylist
+
   belongs_to :company
+  belongs_to :role, optional: true
   has_many :expenses
   has_many :invoices
 

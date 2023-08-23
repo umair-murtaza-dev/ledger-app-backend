@@ -1,4 +1,5 @@
 class Api::V1::StoreLocationsController < Api::V1::ApplicationController
+  before_action :authenticate_admin
   before_action :set_store_location, only: %i[ show update destroy ]
 
   # GET /store_locations
