@@ -1,6 +1,6 @@
 class Company < ApplicationRecord
   acts_as_paranoid
-  
+
   has_many :vendors, dependent: :destroy
   has_many :expenses, dependent: :destroy
   has_many :head_of_accounts, dependent: :destroy
@@ -12,6 +12,7 @@ class Company < ApplicationRecord
   has_many :store_locations, dependent: :destroy
   has_many :invoices
   has_many :customers
+  has_many :users
 
   has_one_attached :logo
 end

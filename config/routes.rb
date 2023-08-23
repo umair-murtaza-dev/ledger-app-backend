@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get 'projects/export', to: 'projects#export'
   get 'store_locations/export', to: 'store_locations#export'
   get 'vendors/export', to: 'vendors#export'
+  get 'users/export', to: 'users#export'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   namespace :api do
@@ -26,6 +27,7 @@ Rails.application.routes.draw do
 
     namespace :v1 do
       resources :vendors, except: :edit
+      resources :users, except: :edit
       resources :projects, except: :edit
       resources :head_of_accounts, except: :edit
       resources :expenses, except: :edit do

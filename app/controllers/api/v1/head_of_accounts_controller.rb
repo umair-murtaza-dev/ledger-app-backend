@@ -57,6 +57,7 @@ class Api::V1::HeadOfAccountsController < Api::V1::ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_head_of_account
       @head_of_account = current_company.head_of_accounts.where(id: params[:id])&.first
+      render json: {error_message: "head_of_account can not be found"}, status: :not_found unless @head_of_account.present?
     end
 
     # Only allow a list of trusted parameters through.

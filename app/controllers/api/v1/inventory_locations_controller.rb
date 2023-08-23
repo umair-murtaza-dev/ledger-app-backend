@@ -56,6 +56,7 @@ class Api::V1::InventoryLocationsController < Api::V1::ApplicationController
     # Use callbacks to share common setup or constraints between actions.
   def set_inventory_location
     @inventory_location = current_company.inventory_locations.where(id: params[:id])&.first
+    render json: {error_message: "inventory_location can not be found"}, status: :not_found unless @inventory_location.present?
   end
 
     # Only allow a list of trusted parameters through.

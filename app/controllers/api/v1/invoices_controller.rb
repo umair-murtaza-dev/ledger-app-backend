@@ -73,7 +73,8 @@ class Api::V1::InvoicesController < Api::V1::ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
   def set_invoice
-    @invoice = current_company.invoices.find(params[:id])
+    @invoice = current_company.invoices.find_by(id: params[:id])
+    render json: {error_message: "invoice can not be found"}, status: :not_found unless @invoice.present?
   end
 
   # Only allow a list of trusted parameters through.
