@@ -30,8 +30,12 @@ class Api::V1::ApplicationController < ActionController::API
     head :unauthorized unless signed_in?
   end
 
+  def authenticate_company_admin(options = {})
+    head :unauthorized unless current_user.role&.is_company_admin
+  end
+
   def authenticate_admin(options = {})
-    head :unauthorized unless @current_user.role&.is_company_admin
+    head :unauthorized unless current_user.role&.is_admin
   end
 
   def current_user
