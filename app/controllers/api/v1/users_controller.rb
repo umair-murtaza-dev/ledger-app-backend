@@ -8,7 +8,7 @@ class Api::V1::UsersController < Api::V1::ApplicationController
     @users = current_company.users.order("#{params[:order_by]} #{params[:direction]}")
     @users = @users.apply_filter(params[:search_query]) if params[:search_query].present?
     @users = paginate @users, per_page: 20
-    render json: {data: @users, csv_file_link: ENV['USERS_CSV_EXPORT_PATH']}, include: [:expenses, :invoices]
+    render json: {data: @users, csv_file_link: ENV['USERS_CSV_EXPORT_PATH']}, include: [:expenses, :invoices, :role]
   end
 
   # GET /users/1
