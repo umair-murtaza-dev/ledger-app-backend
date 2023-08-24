@@ -28,7 +28,8 @@ class User < ApplicationRecord
     'id' => self.id,
     'firstname' => firstname,
     'lastname' => lastname,
-    'email' => email
+    'email' => email,
+    'role_title' => role_title
   }
   end
 
@@ -36,5 +37,9 @@ class User < ApplicationRecord
   {
     'firstname' => firstname
   }
+  end
+
+  def role_title
+    self.role&.title
   end
 end
