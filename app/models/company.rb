@@ -13,6 +13,7 @@ class Company < ApplicationRecord
   has_many :invoices
   has_many :customers
   has_many :users
+  has_many :accounts
 
   has_one_attached :logo
 end

@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get 'store_locations/export', to: 'store_locations#export'
   get 'vendors/export', to: 'vendors#export'
   get 'users/export', to: 'users#export'
+  get 'accounts/export', to: 'accounts#export'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   namespace :api do
@@ -44,7 +45,7 @@ Rails.application.routes.draw do
           patch :upload_attachment
         end
       end
-
+      resources :accounts, except: :edit
     end
   end
   resources :users, only: [:show, :update]
