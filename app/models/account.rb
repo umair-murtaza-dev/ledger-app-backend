@@ -3,6 +3,7 @@ class Account < ApplicationRecord
 
   belongs_to :user
   belongs_to :head_of_account, optional: true
+  belongs_to :expense, optional: true
 
   validates :title, presence: true
   validates :title, uniqueness: { case_senstitive: false }
@@ -33,7 +34,7 @@ class Account < ApplicationRecord
   end
 
   def user_name
-    self.user.firstname + self.user.lastname
+    self.user.firstname + " " + self.user.lastname
   end
 
   def self.apply_filter(query)
